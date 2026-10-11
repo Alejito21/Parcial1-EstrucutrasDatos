@@ -30,7 +30,8 @@ public class ServicioPaqueteria {
     // Necesidad 4: municipios ordenados alfabéticamente y sin duplicados
     private final TreeSet<String> municipiosOrdenados;
 
-    // Necesidad 5: atención por mayor prioridad (prioridad, tiempo estimado, código)
+    // Necesidad 5: atención por mayor prioridad (prioridad, tiempo estimado, código);
+    // los entregados se descartan de forma perezosa al llegar a la cima
     private final PriorityQueue<Paquete> colaPrioridad;
 
     // Necesidad 6: historial de entregas en orden real de entrega (lista enlazada propia)
@@ -160,7 +161,6 @@ public class ServicioPaqueteria {
         }
         Paquete paquete = paquetesPorCodigo.get(codigo);
         paquetesPendientes.remove(paquete);
-        colaPrioridad.remove(paquete);
         historialEntregas.agregar(paquete);
         repartidor.setDisponible(true);
         return true;
@@ -203,7 +203,15 @@ public class ServicioPaqueteria {
 
     // Siguiente paquete que debe despacharse según prioridad, tiempo estimado y código
     public Paquete obtenerSiguientePrioritario() {
+        limpiarCimaPrioridad();
         return colaPrioridad.peek();
+    }
+
+    // Descarta de la cima de la cola los paquetes que ya no están pendientes (eliminación perezosa)
+    private void limpiarCimaPrioridad() {
+        while (!colaPrioridad.isEmpty() && !paquetesPendientes.contains(colaPrioridad.peek())) {
+            colaPrioridad.poll();
+        }
     }
 
     // Orden completo de despacho prioritario sin alterar la cola original
@@ -211,7 +219,10 @@ public class ServicioPaqueteria {
         PriorityQueue<Paquete> copia = new PriorityQueue<>(colaPrioridad);
         List<Paquete> orden = new ArrayList<>();
         while (!copia.isEmpty()) {
-            orden.add(copia.poll());
+            Paquete p = copia.poll();
+            if (paquetesPendientes.contains(p)) {
+                orden.add(p);
+            }
         }
         return orden;
     }
