@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.Model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -113,6 +114,11 @@ public class ServicioPaqueteria {
     // Busca un repartidor por su identificación
     public Repartidor buscarRepartidor(String id) {
         return repartidores.get(id);
+    }
+
+    // Todos los repartidores registrados (solo lectura)
+    public Collection<Repartidor> obtenerRepartidores() {
+        return Collections.unmodifiableCollection(repartidores.values());
     }
 
     // Busca el primer repartidor disponible cuya zona coincide con el municipio dado

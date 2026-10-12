@@ -134,7 +134,7 @@ public class Main {
     }
 
     // Registra los 30 paquetes de la jornada (6 destinos, códigos no consecutivos)
-    private static void cargarPaquetes(ServicioPaqueteria servicio) {
+    public static void cargarPaquetes(ServicioPaqueteria servicio) {
         servicio.registrarPaquete(new Paquete("PQ731", "Armenia", 4.5, 5, 45));
         servicio.registrarPaquete(new Paquete("PQ105", "Salento", 3.0, 5, 25));
         servicio.registrarPaquete(new Paquete("PQ942", "Armenia", 7.2, 4, 20));
@@ -168,7 +168,7 @@ public class Main {
     }
 
     // Registra 7 repartidores (uno por zona y uno adicional no disponible en Armenia)
-    private static void cargarRepartidores(ServicioPaqueteria servicio) {
+    public static void cargarRepartidores(ServicioPaqueteria servicio) {
         servicio.registrarRepartidor(new Repartidor("R01", "Laura Gómez Ríos", "Armenia", true));
         servicio.registrarRepartidor(new Repartidor("R02", "Carlos Mejía Ortiz", "Salento", true));
         servicio.registrarRepartidor(new Repartidor("R03", "Andrea López Cano", "Calarcá", true));

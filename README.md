@@ -24,6 +24,10 @@ Paquete `co.edu.uniquindio.poo.Main`:
 
 - **`Main`**: carga 30 paquetes y 7 repartidores y muestra en consola cada funcionalidad.
 
+Paquete `co.edu.uniquindio.poo.View`:
+
+- **`VentanaPrincipal`**: interfaz gráfica (Swing) para probar todas las operaciones de forma interactiva. Usa los mismos datos de `Main`.
+
 ## Estructuras de datos utilizadas
 
 | Necesidad | Estructura | Operación principal | Complejidad | Por qué |
@@ -64,7 +68,7 @@ Paquete `co.edu.uniquindio.poo.Main`:
 - JDK 24 o superior (el `pom.xml` compila con `maven.compiler.source/target` 24).
 - Maven 3.
 
-**Comandos** (desde la carpeta donde está el `pom.xml`)
+**Comandos** (desde la carpeta `Parcial1/`, donde está el `pom.xml`)
 
 ```bash
 # Compilar
@@ -72,6 +76,9 @@ mvn compile
 
 # Ejecutar Main
 mvn exec:java -Dexec.mainClass=co.edu.uniquindio.poo.Main.Main
+
+# Abrir la interfaz gráfica
+mvn exec:java -Dexec.mainClass=co.edu.uniquindio.poo.View.VentanaPrincipal
 ```
 
 Si ya está compilado, también se puede ejecutar directo con Java:
@@ -79,3 +86,18 @@ Si ya está compilado, también se puede ejecutar directo con Java:
 ```bash
 java -cp target/classes co.edu.uniquindio.poo.Main.Main
 ```
+
+## Interfaz gráfica
+
+Pensada para la sustentación. Tiene una pestaña por tema y, abajo, una **consola de operaciones** que muestra cada método llamado y lo que retornó (por ejemplo `asignarPaquete("PQ105", "R01") -> false (la zona del repartidor no coincide con el destino)`).
+
+- **Paquetes**: registrar paquetes (con sus validaciones) y consultar por código.
+- **Repartidores**: registrar, buscar por ID y buscar un disponible por zona.
+- **Asignación y entregas**: asignar, entregar, ver las asignaciones vigentes y el historial (`ListaEnlazada`).
+- **Atención**: orden por llegada frente al orden por prioridad.
+- **Municipios**: municipios sin repetidos, ordenados y paquetes por municipio.
+- **Ordenamientos**: todos los criterios de `Comparable` y `Comparadores`.
+- **Algoritmos**: funciones recursivas, búsqueda binaria y divide y vencerás.
+- **Lista enlazada**: prueba la `ListaEnlazada<String>` y dibuja sus nodos (cabeza, cola y `null`).
+
+El botón **Reiniciar jornada** vuelve a los 30 paquetes iniciales.
